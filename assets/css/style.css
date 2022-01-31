@@ -1,3 +1,5 @@
+
+/* Font family courtesy of https://fonts.google.com/specimen/Josefin+Sans  */
 body {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 16px;
@@ -16,5 +18,13 @@ body {
   margin: 50px 50px 0px;
 }
 
+.searchBar{
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
 
+.searchResults{
+  margin: 50px 50px 0px;
+}
 
