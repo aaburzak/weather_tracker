@@ -3,39 +3,70 @@
 // // Open Weather API Key 
 const OpenWeather_APIKey = "73f3e432cf2f9db4a14509ff743323be";
 
-const queryUrl = "api.openweathermap.org/data/2.5/weather";
+// var searchedCity =$("#searchCity").val();
 
-var bostonTest = "Boston"
+let cityName;
 
-function getCoordinate(cityName){
-  var apiUrl = `${queryUrl}?q=${cityName}&appid=${OpenWeather_APIKey}`
-  fetch(apiUrl)
-    .then(function(response){
-      return response.json
-    })
-    .then(function(data){
-      if (!data[0]){
-        alert ("invalid location")
-      } else {
-        console.log(data)
-      }
-    }).catch(function(err){
-      console.error(err)
-    })
-}
 
 
 
 $("#searchBtn").click(function (event){
-  event.preventDefault;
-  getCoordinate(bostonTest)
+  event.preventDefault();
+  var current = $("#searchCity").val()
+  citySearch(current)
+  // console.log("Hooray!")
+});
 
-})
+
+
+function citySearch(cityName){
+  var queryURL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${OpenWeather_APIKey}`
+  fetch(queryURL)
+  .then(function(response){
+    return response.json()
+  })
+  .then(function(data){
+    console.log(data)
+
+  })
+}
+
+// fetch(queryURL)
+// console.log(queryURL)
 
 
 
-// //declared variables
-// const city;
+// function getCoordinate(cityName){
+//   var apiUrl = `${queryUrl}?q=${cityName}&appid=${OpenWeather_APIKey}`
+//   fetch(apiUrl)
+//     .then(function(response){
+//       return response.json
+//     })
+//     .then(function(data){
+//       if (!data[0]){
+//         alert ("invalid location")
+//       } else {
+//         console.log(data)
+//       }
+//     }).catch(function(err){
+//       console.error(err)
+//     })
+// }
+
+
+
+  
+
+
+// function citySearch(){
+
+// cityName = searchedCity
+
+// fetch(queryURL)
+// console.log(queryURL)
+// };
+
+
 
 
 //displays current date and time through moment.js

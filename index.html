@@ -29,16 +29,21 @@
       <div class ="row">
         <div class = "col-md-12 searchBar">
           <form>
-            <input type="text" placeholder="Enter City"/>
+            <input id = "searchCity" type="text" placeholder="Enter City"/>
             <button type="submit" id="searchBtn">Find Weather</button>
           </form>
         </div>
       </div>
 
       <div class = "row searchResults">
-        <div class = "col-md-4 currentConditions">
-          City's Current Conditions Here
-
+        <div id="weatherReadout" class = "col-md-4 currentConditions">
+          <h2 id="currentCity">test</h2>
+          <h3 id= "currentConditions"></h3>
+          <h3 id ="currentTemp"></h3>
+          <h3 id="currentHigh"></h3>
+          <h3 id ="currentHumidity"></h3>
+          <h3 id="currentWind"></h3>
+          <h3 id="uvIndex"></h3>
         </div>
         <div class = "col-md-7 forecast">
           5 Day Forecast Here
