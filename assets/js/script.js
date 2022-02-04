@@ -3,13 +3,11 @@
 // // Open Weather API Key 
 const OpenWeather_APIKey = "73f3e432cf2f9db4a14509ff743323be";
 
-// var searchedCity =$("#searchCity").val();
-
 let cityName;
-let coordinates = [];
 
 
 
+// takes the inputted city name and passes it to the searchCity function
 $("#searchBtn").click(function (event){
   event.preventDefault();
   var current = $("#searchCity").val()
@@ -18,77 +16,42 @@ $("#searchBtn").click(function (event){
 });
 
 
-
+//searches city name in geoURL to obtain coordinates then passes coordinates into oneCallUrl for a comprehensive weather report
 function citySearch(cityName){
   var geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${OpenWeather_APIKey}`
   fetch(geoURL)
   .then(function(response){
     return response.json()
   })
+
   .then(function(data){
     console.log(data)
     var lat = data[0].lat;
     var lon = data[0].lon;
+    var name = data[0].name;
+    //displays the searched City's name 
+    $("#currentCity").text(name);
 
-    console.log(lat);
-    console.log(lon);
-
-    var oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${OpenWeather_APIKey}`
+    var oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${OpenWeather_APIKey}`
     fetch(oneCallUrl)
     .then(function(response){
       return response.json()
     })
     .then(function(weatherReport){
-      console.log (weatherReport)
+      console.log (weatherReport);
+
+      var temp = weatherReport.current.temp;
+      var humid = weatherReport.current.humidity;
+      var windSpeed = weatherReport.current.wind_speed;
+      var uv = weatherReport.current.uvi;
+      $("#currentTemp").text("Temp: " + temp +"°F" );
+      $("#currentHumidity").text("Humidity: " + humid +"%");
+      $("#currentWind").text("Wind Speed: " + windSpeed +"mph")
+      $("#uvIndex").text("UV Index: " + uv)
     })
   })
 }
 
-// function oneCall(){
-//   var oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${OpenWeather_APIKey}`
-//   fetch(oneCallUrl)
-//   .then(function(response){
-//     return response.json()
-//   })
-//   .then(function(weatherReport){
-//     console.log (weatherReport)
-//   })
-// }
-
-// fetch(queryURL)
-// console.log(queryURL)
-
-
-
-// function getCoordinate(cityName){
-//   var apiUrl = `${queryUrl}?q=${cityName}&appid=${OpenWeather_APIKey}`
-//   fetch(apiUrl)
-//     .then(function(response){
-//       return response.json
-//     })
-//     .then(function(data){
-//       if (!data[0]){
-//         alert ("invalid location")
-//       } else {
-//         console.log(data)
-//       }
-//     }).catch(function(err){
-//       console.error(err)
-//     })
-// }
-
-
-
-  
-
-
-// function citySearch(){
-
-// cityName = searchedCity
-
-// fetch(queryURL)
-// console.log(queryURL)
-// };
 
 
 
