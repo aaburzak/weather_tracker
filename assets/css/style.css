@@ -26,15 +26,21 @@ body {
 
 .searchResults{
   margin: 50px 50px 0px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
+.forecast{
+  font-size: small;
+  text-align: center;
+}
+.nfive{
+  margin-top: 50px;
+  text-align: center;
+}
+.fiveDay{
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
 
-/* .forecast{
-  border-style: solid;
-  border-color: navy;
-  border-width: 3px;
-} */
-
+}
