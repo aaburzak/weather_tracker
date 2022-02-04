@@ -40,14 +40,30 @@ function citySearch(cityName){
     .then(function(weatherReport){
       console.log (weatherReport);
 
+      //variables and logic to render current day's weather
+      var icon = weatherReport.current.weather[0].icon;
       var temp = weatherReport.current.temp;
       var humid = weatherReport.current.humidity;
       var windSpeed = weatherReport.current.wind_speed;
       var uv = weatherReport.current.uvi;
+
+      $("#currentConditions").html(`<img src="http://openweathermap.org/img/wn/${icon}@2x.png">`);
       $("#currentTemp").text("Temp: " + temp +"°F" );
       $("#currentHumidity").text("Humidity: " + humid +"%");
-      $("#currentWind").text("Wind Speed: " + windSpeed +"mph")
-      $("#uvIndex").text("UV Index: " + uv)
+      $("#currentWind").text("Wind Speed: " + windSpeed +"mph");
+      $("#uvIndex").text("UV Index: " + uv);
+
+      //variables and logic to render 5 day forecast
+      var iconDay1 = weatherReport.daily[1].weather[0].icon;
+      var iconDay2 = weatherReport.daily[2].weather[0].icon;
+      var iconDay3 = weatherReport.daily[3].weather[0].icon;
+      var iconDay4 = weatherReport.daily[4].weather[0].icon;
+      var iconDay5 = weatherReport.daily[5].weather[0].icon;
+      $("#futureIcon1").html(`<img src="http://openweathermap.org/img/wn/${iconDay1}@2x.png">`);
+      $("#futureIcon2").html(`<img src="http://openweathermap.org/img/wn/${iconDay2}@2x.png">`);
+      $("#futureIcon3").html(`<img src="http://openweathermap.org/img/wn/${iconDay3}@2x.png">`);
+      $("#futureIcon4").html(`<img src="http://openweathermap.org/img/wn/${iconDay4}@2x.png">`);
+      $("#futureIcon5").html(`<img src="http://openweathermap.org/img/wn/${iconDay5}@2x.png">`);
     })
   })
 }
