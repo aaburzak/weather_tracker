@@ -6,7 +6,7 @@ const OpenWeather_APIKey = "73f3e432cf2f9db4a14509ff743323be";
 // var searchedCity =$("#searchCity").val();
 
 let cityName;
-
+let coordinates = [];
 
 
 
@@ -20,16 +20,40 @@ $("#searchBtn").click(function (event){
 
 
 function citySearch(cityName){
-  var queryURL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${OpenWeather_APIKey}`
-  fetch(queryURL)
+  var geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${OpenWeather_APIKey}`
+  fetch(geoURL)
   .then(function(response){
     return response.json()
   })
   .then(function(data){
     console.log(data)
+    var lat = data[0].lat;
+    var lon = data[0].lon;
 
+    console.log(lat);
+    console.log(lon);
+
+    var oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${OpenWeather_APIKey}`
+    fetch(oneCallUrl)
+    .then(function(response){
+      return response.json()
+    })
+    .then(function(weatherReport){
+      console.log (weatherReport)
+    })
   })
 }
+
+// function oneCall(){
+//   var oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${OpenWeather_APIKey}`
+//   fetch(oneCallUrl)
+//   .then(function(response){
+//     return response.json()
+//   })
+//   .then(function(weatherReport){
+//     console.log (weatherReport)
+//   })
+// }
 
 // fetch(queryURL)
 // console.log(queryURL)
