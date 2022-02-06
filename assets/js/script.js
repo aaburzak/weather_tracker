@@ -4,7 +4,15 @@
 const OpenWeather_APIKey = "73f3e432cf2f9db4a14509ff743323be";
 
 let cityName;
+let searchHistory = [];
 
+
+//displays current date and time through moment.js
+const today = moment();
+$("#currentDay").text(today.format("dddd, MMM Do, YYYY"));
+
+const localTime = moment();
+$("#localTime").text(today.format("LT"));
 
 
 // takes the inputted city name and passes it to the searchCity function
@@ -52,6 +60,22 @@ function citySearch(cityName){
       $("#currentHumidity").text("Humidity: " + humid +"%");
       $("#currentWind").text("Wind Speed: " + windSpeed +"mph");
       $("#uvIndex").text("UV Index: " + uv);
+      var uv_parse = parseFloat(uv);
+        if (uv_parse <= 2) {
+          $("#uvIndex").removeClass("med_uv high_uv");
+          $("#uvIndex").addClass("low_uv");
+        }
+        else if (uv_parse > 2 && uv.value <=8){
+
+          $("#uvIndex").removeClass("low_uv high_uv");
+          $("#uvIndex").addClass("med_uv");
+        }
+        else if (uv_parse > 8){
+          $("#uvIndex").removeClass("low_uv med_uv");
+          $("uvIndex").addClass("high_uv");
+        };
+
+        console.log(uv_parse);
 
       //variables and logic to render 5 day forecast
       $("#nextFive").text("Next Five Days")
@@ -98,17 +122,26 @@ function citySearch(cityName){
       $("#futureWind3").text("Wind Speed: " + windDay3+"mph");
       $("#futureWind4").text("Wind Speed: " + windDay4+"mph");
       $("#futureWind5").text("Wind Speed: " + windDay5+"mph");
+
+      //pushes the searched information to local storage
+      searchHistory.push({
+        name : name, icon : icon, temp : temp, humid : humid, windSpeed : windSpeed, uv : uv, iconDay1 : iconDay1, iconDay2 : iconDay2, iconDay3 : iconDay3, iconDay4 : iconDay4, iconDay5 : iconDay5, tempDay1 : tempDay1, tempDay2 : tempDay2, tempDay3 : tempDay3, tempDay4 : tempDay4, tempDay5 : tempDay5, humidityDay1 : humidityDay1, humidityDay2 : humidityDay2, humidityDay3 : humidityDay3, humidityDay4 : humidityDay4, humidityDay5 : humidityDay5, windDay1 : windDay1, windDay2 : windDay2, windDay3 : windDay3, windDay4 : windDay4, windDay5 : windDay5})
+      localStorage.setItem("citySave", JSON.stringify(searchHistory))
+
     })
   })
 }
 
 
+//displays local storage in the console
+function getHistory(){
+    var history = localStorage.getItem("citySave");
+    searchHistory = JSON.parse(history) || [];
+
+    console.log(searchHistory);
+}
+
+getHistory()
 
 
 
-//displays current date and time through moment.js
-const today = moment();
-$("#currentDay").text(today.format("dddd, MMM Do, YYYY"));
-
-const localTime = moment();
-$("#localTime").text(today.format("LT"));

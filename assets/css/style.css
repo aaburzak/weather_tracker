@@ -44,3 +44,17 @@ body {
   align-items: left;
 
 }
+
+.low_uv{
+  color: green;
+}
+
+.med_uv{
+  color: yellow;
+}
+
+
+.high_uv{
+  color: red;
+}
+
