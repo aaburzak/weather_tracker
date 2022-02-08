@@ -5,6 +5,7 @@ const OpenWeather_APIKey = "73f3e432cf2f9db4a14509ff743323be";
 
 let cityName;
 let searchHistory = [];
+let oldSearch = $(".oldSearches")
 
 
 //displays current date and time through moment.js
@@ -125,7 +126,7 @@ function citySearch(cityName){
 
       //pushes the searched information to local storage
       searchHistory.push({
-        name : name, icon : icon, temp : temp, humid : humid, windSpeed : windSpeed, uv : uv, iconDay1 : iconDay1, iconDay2 : iconDay2, iconDay3 : iconDay3, iconDay4 : iconDay4, iconDay5 : iconDay5, tempDay1 : tempDay1, tempDay2 : tempDay2, tempDay3 : tempDay3, tempDay4 : tempDay4, tempDay5 : tempDay5, humidityDay1 : humidityDay1, humidityDay2 : humidityDay2, humidityDay3 : humidityDay3, humidityDay4 : humidityDay4, humidityDay5 : humidityDay5, windDay1 : windDay1, windDay2 : windDay2, windDay3 : windDay3, windDay4 : windDay4, windDay5 : windDay5})
+        name : name})
       localStorage.setItem("citySave", JSON.stringify(searchHistory))
 
     })
@@ -137,11 +138,22 @@ function citySearch(cityName){
 function getHistory(){
     var history = localStorage.getItem("citySave");
     searchHistory = JSON.parse(history) || [];
-
     console.log(searchHistory);
+    oldSearch.empty()
+    searchHistory.forEach(element => {
+      var newButton = $('<button>');
+      newButton.text(element.name);
+      newButton.addClass("historyButton");
+      oldSearch.append(newButton)
+    });
 }
 
 getHistory()
 
+$(document).on('click', '.historyButton', function(event){
+  event.preventDefault();
+  citySearch(event.target.textContent) 
+})
 
 
+//  icon : icon, temp : temp, humid : humid, windSpeed : windSpeed, uv : uv, iconDay1 : iconDay1, iconDay2 : iconDay2, iconDay3 : iconDay3, iconDay4 : iconDay4, iconDay5 : iconDay5, tempDay1 : tempDay1, tempDay2 : tempDay2, tempDay3 : tempDay3, tempDay4 : tempDay4, tempDay5 : tempDay5, humidityDay1 : humidityDay1, humidityDay2 : humidityDay2, humidityDay3 : humidityDay3, humidityDay4 : humidityDay4, humidityDay5 : humidityDay5, windDay1 : windDay1, windDay2 : windDay2, windDay3 : windDay3, windDay4 : windDay4, windDay5 : windDay5
