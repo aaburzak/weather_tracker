@@ -155,5 +155,10 @@ $(document).on('click', '.historyButton', function(event){
   citySearch(event.target.textContent) 
 })
 
+// $("#clearBtn").click(function(event){
+//   // event.preventDefault();
+//   localStorage.removeItem(searchHistory);
+
+// })
 
 //  icon : icon, temp : temp, humid : humid, windSpeed : windSpeed, uv : uv, iconDay1 : iconDay1, iconDay2 : iconDay2, iconDay3 : iconDay3, iconDay4 : iconDay4, iconDay5 : iconDay5, tempDay1 : tempDay1, tempDay2 : tempDay2, tempDay3 : tempDay3, tempDay4 : tempDay4, tempDay5 : tempDay5, humidityDay1 : humidityDay1, humidityDay2 : humidityDay2, humidityDay3 : humidityDay3, humidityDay4 : humidityDay4, humidityDay5 : humidityDay5, windDay1 : windDay1, windDay2 : windDay2, windDay3 : windDay3, windDay4 : windDay4, windDay5 : windDay5
